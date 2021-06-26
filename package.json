@@ -1,0 +1,130 @@
+{
+  "name": "pr-167",
+  "version": "1.0.0",
+  "description": "A little project to test https://github.com/jmerle/competitive-companion/pull/167",
+  "repository": "https://github.com/jmerle/pr-167",
+  "author": "Jasper van Merle",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "lint": "yarn lint:eslint && yarn lint:prettier",
+    "lint:eslint": "eslint --format codeframe 'src/**'",
+    "lint:prettier": "prettier --check --ignore-path .gitignore '**/*.{yml,json}'",
+    "fix": "yarn fix:eslint && yarn fix:prettier",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:prettier": "prettier --write --ignore-path .gitignore '**/*.{yml,json}'"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "jsdom": "^16.6.0"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^16.2.12",
+    "@types/node": "^15.12.4",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^4",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.0.0",
+    "typescript": "^4.3.4"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "ignorePatterns": [
+      "*.html"
+    ],
+    "rules": {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/explicit-member-accessibility": "error",
+      "@typescript-eslint/no-inferrable-types": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          "selector": "default",
+          "format": [
+            "camelCase"
+          ]
+        },
+        {
+          "selector": "variable",
+          "format": [
+            "camelCase",
+            "UPPER_CASE"
+          ]
+        },
+        {
+          "selector": [
+            "typeLike",
+            "enumMember"
+          ],
+          "format": [
+            "PascalCase"
+          ]
+        }
+      ],
+      "@typescript-eslint/explicit-function-return-type": [
+        "error",
+        {
+          "allowExpressions": true
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          }
+        }
+      ],
+      "no-constant-condition": [
+        "error",
+        {
+          "checkLoops": false
+        }
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --format codeframe --fix"
+    ],
+    "*.{yml,json}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 120,
+    "arrowParens": "avoid"
+  }
+}
